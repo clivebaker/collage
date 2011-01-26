@@ -1,0 +1,20 @@
+<h1>Editing collage_template</h1>
+
+<% form_for(@collage_template,:html=>{:multipart=>true}) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+   <p>
+      <label>Select File</label>
+      <%= f.file_field :datafile %>
+    </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @collage_template %> |
+<%= link_to 'Back', collage_templates_path %>

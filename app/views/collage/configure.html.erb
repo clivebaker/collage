@@ -1,0 +1,268 @@
+
+
+<style type="text/css">
+
+#droppable { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
+</style>
+<script type="text/javascript">
+
+   var DEBUG=false;
+
+   function showWait(){
+        jQuery('#wait-dialog').dialog('open');
+   }
+   function hideWait(){
+        jQuery('#wait-dialog').dialog('close');
+   }
+
+   function showCollage(){
+        jQuery('#generated-collage').dialog('open');
+   }
+   function hideCollage(){
+        jQuery('#generated-collage').dialog('close');
+   }
+
+
+    jQuery(function() {
+
+
+
+
+
+
+
+jQuery("#wait-dialog").dialog({
+    autoOpen: false,
+    height: 200,
+    width: 300,
+    modal: true,
+    open: function(event, ui) { jQuery('.ui-dialog-titlebar-close').hide(); }
+});
+
+jQuery("#generated-collage").dialog({
+            autoOpen: false,
+            height: 550 ,
+            width: 700,
+            modal: true,
+    open: function(event, ui) { jQuery('.ui-dialog-titlebar-close').show(); }
+        });
+
+
+
+      jQuery(".controls-info").fadeTo('slow',0.5);
+      jQuery(".collage-drop").droppable({
+            drop: function(event, ui) {
+                var drop_div=jQuery(this);
+                if (jQuery(this).children().length<1){
+                var set_image = jQuery("#dragging-image").find('img');
+                set_image.draggable({
+                    revert:false,
+                    start: function(event, ui) {
+                    },
+                    stop: function(event, ui) {
+                        log("Dragging Element Placed: (position x:y) "+ jQuery(this).css('left')+" : "+jQuery(this).css('top') + " inside: "+drop_div.attr('id'));
+                        jQuery("#"+drop_div.attr('id')+"-position").html("Position: "+jQuery(this).css('left')+" : "+jQuery(this).css('top'));
+                        jQuery("#"+drop_div.attr('id')+"-size").html("Size: "+jQuery(this).width()+" : "+jQuery(this).height());
+                    }
+                });
+                if (set_image.length==1){
+                  log("Dropped Image:"+set_image.attr('src'));
+                 set_image.css({top:0,left:0});
+                  jQuery(this).html(set_image);
+                  jQuery("#"+drop_div.attr('id')+"-controls").html('<div class="ui-state-default ui-corner-all" onclick="adjustImageSize(\''+drop_div.attr('id')+'\',\'-\')"><span class="ui-icon ui-icon-minus"></span></div><div class="ui-state-default ui-corner-all" onclick="adjustImageSize(\''+drop_div.attr('id')+'\',\'+\')"><span class="ui-icon ui-icon-plus"></span></div>');
+                }
+               }else{
+                    //alert("An image has already been placed here");
+
+                }
+            }
+        });
+
+        var parent;
+
+
+        jQuery('.image-img').draggable({
+            revert: true,
+            start: function(event, ui) {
+                log("Starting to drag Image");
+                parent = jQuery(this).parent();
+                log("Set The parent");
+
+
+
+                var x = event.pageX-50;
+                var y = event.pageY-50;
+                log("Set Coordinates :" + x + " " + y);
+
+                jQuery('#dragging-image').css({top:y+'px',left:x+'px'});
+                log("Picked up image at: X-Y "+ x + "-" +y);
+              
+                jQuery("#dragging-image").html(this);
+                log("Set image into dragging-image Div");
+
+
+
+            },
+        drag:function(event, ui) {
+            //log("Dragging");
+        },
+        stop: function(event, ui) {
+                jQuery(parent).html(this);
+            log("Put the image back");
+                jQuery(this).css({top:'0',left:'0'});
+            log("reset image css");
+
+            }
+    });
+    });
+
+
+    function log(message){
+        if (DEBUG){
+            jQuery("#debug").find('ul').append('<li>'+message+'</li>');
+        }
+    }
+
+
+        function adjustImageSize(droppable,operator){
+           var image =  jQuery('#'+droppable).find('img');
+          log("Image Width (Before): " + image.width());
+            image.width(eval(image.width() + operator + 20));
+            jQuery("#"+droppable+"-size").html("Size: "+image.width()+" : "+image.height());
+          log("Image Width (After): " + image.width());
+        }
+
+
+
+       function getParameters(){
+          showWait();
+          var div_list = jQuery("#collage-droppable").find('.actual-drop');
+           var return_json = [];
+           log("Div List length: " + div_list.length);
+           for (var i=0;i<div_list.length;i++){
+               log(jQuery(div_list[i]).attr('id'));
+               var drop_div=jQuery(div_list[i]);
+               var drop_img = drop_div.find('img');
+               var image_id = drop_img.attr('id');
+               var div_x = drop_div.css('left');
+               var div_y = drop_div.css('top');
+               var div_w = drop_div.css('width');
+               var div_h = drop_div.css('height');
+               var img_x = drop_img.css('left');
+               var img_y = drop_img.css('top');
+               var img_w = drop_img.width();
+               var img_h = drop_img.height();
+               return_json.push(
+               {'image':  {
+                             "image_id"  :   image_id,
+                             "div_x"     :   div_x,
+                             "div_y"     :   div_y,
+                             "div_w"     :   div_w,
+                             "div_h"     :   div_h,
+                             "img_x"     :   img_x,
+                             "img_y"     :   img_y,
+                             "img_w"     :   img_w,
+                             "img_h"     :   img_h
+                           }
+               });
+             //  log("Image id: "+ drop_img.attr('id'));
+             //  log("Image position: "+ drop_img.css('left')+" : "+drop_img.css('top'));
+             //  log("Image size: "+ drop_img.css('width')+" : "+drop_img.css('height'));
+             //  log("DIV position: "+ drop_div.css('left')+" : "+drop_div.css('top'));
+             //  log("DIV size: "+ drop_div.css('width')+" : "+drop_div.css('height'));
+
+           }
+           log("return Json: " + JSON.stringify(return_json) );
+
+          jQuery("#parameters").attr('value',JSON.stringify(return_json));
+         // return true;
+
+                // jQuery('#generate_form').submit();
+
+
+
+       }
+
+
+</script>
+
+<style>
+  <%@collage_regions.each_with_index do |region,index|%>
+    /* Region name:  <%=region.name%> */
+    #collage-drop-<%=index%>{position:absolute;width:<%=region.width/2%>px;height:<%=region.height/2%>px;background-color:green;border:1px solid black;}
+    .collage-drop-<%=index%>-position{position:absolute;left:<%=region.left/2%>px;top:<%=region.top/2%>px;}
+  <%end%>
+  
+</style>
+
+
+<div id="droppable-group">
+
+
+
+<div id="collage-background">
+  <%=image_tag 'collage/collage_templates/'+@collage_template.background%>
+</div>
+
+
+<div id="collage-droppable">
+
+  <%@collage_regions.each_with_index do |region,index|%>
+      <div id="collage-drop-<%=index%>" class="collage-drop collage-drop-<%=index%>-position actual-drop"></div>
+    <div class="controls-info collage-drop-<%=index%>-position  ui-corner-all">
+        <div id="collage-drop-<%=index%>-position"></div>
+        <div id="collage-drop-<%=index%>-size"></div>
+    </div>
+    <div id="collage-drop-<%=index%>-controls" class="controls-size collage-drop-<%=index%>-position"></div>
+  <%end%>
+
+
+    </div>
+</div>
+
+
+     <div style="float:left;">
+<% form_remote_tag :url => {:action=>:compile},:html=>{:id=>'generate_form',:onclick => "return getParameters();"} do %>
+    <%= hidden_field_tag 'params','test',:id=>:parameters %>
+    <%= hidden_field_tag :collage_template_id, @collage_template.id %>
+    <%= submit_tag 'Generate Image'%>
+  <% end %>
+
+    
+
+  </div>
+<div id="draggable-group">
+
+
+<div id="collage-images">
+  <%@images.each do |image|%>
+     <div class="image-div">
+      <%=image_tag image.file_name, {:id=>image.id, :class=>"image-img  ui-widget-content"}%>
+       </div>
+  <%end%>
+</div>
+
+
+</div>
+
+
+
+
+<div id="debug" style="display:none"><ul></ul></div>
+
+
+
+
+
+
+
+
+<div id="wait-dialog" title="Please Wait" style="padding:10px; margin:0;background-color:black;" >
+    <p>Please wait! Generating your collage.</p>
+  <div style="padding:10px; margin-left:100px;"><%=image_tag 'loading_wait.gif'%></div>
+
+</div>
+
+<div id="generated-collage" title="Collage" style="padding:10px; margin:0;">
+</div>
+<div id="dragging-image"></div>

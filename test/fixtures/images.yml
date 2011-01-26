@@ -1,0 +1,18 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+photo_1:
+  file_name: photos/medium/IMG_7312.jpg
+  group: 1
+
+photo_2:
+  file_name: photos/medium/IMG_7313.jpg
+  group: 1
+
+photo_3:
+  file_name: photos/medium/IMG_7314.jpg
+  group: 1
+
+photo_4:
+  file_name: photos/medium/IMG_7316.jpg
+  group: 1
+

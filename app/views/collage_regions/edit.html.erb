@@ -1,0 +1,21 @@
+<h3>Editing collage region</h3>
+
+<% form_for(@collage_region) do |f| %>
+  <%= f.error_messages %>
+
+   <fieldset id="new-region">
+            <div><%= f.label :name %>
+            <%= f.text_field :name, :size=>20 %></div>
+            <div><%= f.label :top %>
+            <%= f.text_field :top, :size=>4 %></div>
+            <div><%= f.label :left %>
+            <%= f.text_field :left, :size=>4  %></div>
+            <div><%= f.label :width %>
+            <%= f.text_field :width, :size=>4  %></div>
+            <div><%= f.label :height %>
+            <%= f.text_field :height, :size=>4  %></div>
+            <%= f.submit 'Update' %>
+</fieldset>
+<% end %>
+
+<%= link_to 'Back', collage_template_path(@collage_region.collage_template_id) %>

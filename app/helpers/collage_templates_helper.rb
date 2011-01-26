@@ -1,0 +1,2 @@
+module CollageTemplatesHelper
+end

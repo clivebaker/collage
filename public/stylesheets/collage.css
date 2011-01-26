@@ -1,0 +1,77 @@
+.container{}
+
+#droppable-group{float:left;}
+#draggable-group{padding:0 0 0 33px;margin:0 0 0 0;float:left;}
+
+
+#collage-background{position:relative;margin:0;padding:0;top:0;left:0;}
+/*border:1px solid black;*/
+#collage-background img{position:absolute;width:512px;height:384px;}
+#collage-droppable{position:relative;margin:0;padding:0;width:512px;height:389px;top:0;left:0;}
+/*.collage-drop{border:1px dashed green;}*/
+
+
+/*#collage-drop-1{position:absolute;width:186px;height:142px;background-color:green;border:1px solid black;}*/
+/*.collage-drop-1-position{position:absolute;left:5px;top:6px;}*/
+
+
+/*#collage-drop-2{position:absolute;width:316px;height:194px;background-color:green;border:1px solid black;}*/
+/*.collage-drop-2-position{position:absolute;left:191px;top:6px;}*/
+
+
+/*#collage-drop-3{position:absolute;width:186px;height:230px;background-color:green;border:1px solid black;}*/
+/*.collage-drop-3-position{position:absolute;left:5px;top:148px;}*/
+
+
+
+/*#collage-drop-4{position:absolute;width:150px;height:177px;background-color:green;border:1px solid black;}*/
+/*.collage-drop-4-position{position:absolute;left:191px;top:200px;}*/
+
+
+/*#collage-drop-5{position:absolute;width:165px;height:177px;background-color:green;border:1px solid black;}*/
+/*.collage-drop-5-position{position:absolute;left:341px;top:200px;}*/
+
+
+
+
+.collage-drop{overflow:hidden;}
+.over-hidden{overflow:hidden;}
+
+
+/*#collage-images{position:relative;top:0;left:520px;width:500px;}*/
+#collage-images{width:400px;}
+
+
+
+/*Controlling the image in the collage*/
+.image-div {position:relative;width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; overflow:hidden; }
+.image-div img { width: 150px; }
+.image-img {position:relative; cursor:move;}
+
+.controls-info  {margin-left:25px;margin-top:4px;padding:3px; background-color:white;}
+
+.controls-size{margin:2px;}
+.controls-size div{margin:2px; width:16px;}
+
+
+
+.image-control{width:15px;margin:1px;padding:1px;}
+
+
+
+#dragging-image {position:absolute;}
+#dragging-image img{width:150px;}
+
+
+/*.build {position:relative;}*/
+#debug {position:absolute;top:450px;left:20px;background-color:yellow;}
+
+#generate_form{width:10px;height:10px;margin-left:160px;margin-bottom:20px;}
+
+#generated-collage img{padding:20px 0 0 30px;width:90%;}
+
+
+/*Template Admin*/
+.collage_background{width:200px;border:1px solid black;}
+#new-region div{float:left;margin-right:20px;}
+

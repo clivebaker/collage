@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  top: 1
+  left: 1
+  width: 1
+  height: 1
+
+two:
+  name: MyString
+  top: 1
+  left: 1
+  width: 1
+  height: 1

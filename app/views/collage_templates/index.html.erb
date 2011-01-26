@@ -1,0 +1,20 @@
+<h3>Collage Templates</h3>
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+
+<% @collage_templates.each do |collage_template| %>
+  <tr>
+    <td><%=h collage_template.name %></td>
+    <td><%= link_to 'View', collage_template %></td>
+    <!--<td><%#= link_to 'Edit', edit_collage_template_path(collage_template) %></td>-->
+    <td><%= link_to 'Delete', collage_template, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New college_template', new_collage_template_path %>

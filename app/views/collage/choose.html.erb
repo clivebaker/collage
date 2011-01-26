@@ -1,0 +1,10 @@
+<h3>Choose a collage template to use</h3>
+
+<div>
+    <%@collage_templates.each do |template|%>
+      <div>
+      <div><%=h template.name%></div>
+      <div><%=link_to image_tag('collage/collage_templates/'+template.background, :class=>'collage_background'),configure_collage_path(template.id)%></div>
+      </div>
+    <%end%>
+</div>

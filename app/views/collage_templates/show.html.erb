@@ -1,0 +1,16 @@
+<h3>Collage Template</h3>
+
+<p>
+  <b>Name: </b><%=h @collage_template.name %>
+</p>
+<%=image_tag ('collage/collage_templates/'+@collage_template.background), :class=>'collage_background' %>
+
+
+  <%= render :partial=>'collage_regions/index'%>
+  <div id="regions"><%= render :partial=>'collage_regions/new'%></div>
+
+
+
+
+<%= link_to 'Edit', edit_collage_template_path(@collage_template) %> |
+<%= link_to 'Back', collage_templates_path %>

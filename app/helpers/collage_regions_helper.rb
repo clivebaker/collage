@@ -1,0 +1,2 @@
+module CollageRegionsHelper
+end

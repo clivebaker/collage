@@ -1,0 +1,25 @@
+<h3>collage regions</h3>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Top</th>
+    <th>Left</th>
+    <th>Width</th>
+    <th>Height</th>
+  </tr>
+
+<% @collage_regions.each do |collage_region| %>
+  <tr>
+    <td><%=h collage_region.name %></td>
+    <td><%=h collage_region.top %></td>
+    <td><%=h collage_region.left %></td>
+    <td><%=h collage_region.width %></td>
+    <td><%=h collage_region.height %></td>
+    <td><%= link_to 'Edit', edit_collage_region_path(collage_region) %></td>
+    <td><%= link_to 'Delete', collage_region, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
